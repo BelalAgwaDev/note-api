@@ -17,18 +17,12 @@ const port=3000
  app.use(bodyParser.json())
 
 
-app.get('/', function (req, res) {
-  res.send(' belal......')
-})
 
 
-app.get('/hello', function (req, res) {
-          res.send('yesssssssssssssssssssss')
-})
-
-
-
+// use note route
 app.use("/api/v1",noteRouter)
+
+
 
 app.listen(port,()=>{
    

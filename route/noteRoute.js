@@ -5,11 +5,11 @@ const route=express.Router()
 
 route.get("/notes",noteController.getAllNotes)
 
-route.post("/notes/save",noteController.saveNotes)
+route.post("/notes",noteController.saveNotes)
 
-route.put("/notes/update",noteController.updateNotes)
+route.put("/notes",noteController.updateNotes)
 
-route.delete("/notes/delete",noteController.deleteNotes)
+route.delete("/notes/:noteId",noteController.deleteNotes)
 
 
 

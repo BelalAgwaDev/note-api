@@ -3,7 +3,7 @@ var MemoryStorage = require('memorystorage');
 var myStorage = new MemoryStorage('note-app');
 
 
-
+//get all keys from memory storage
 exports.getKays = (myStorage) => {
 
     var keys = []
@@ -15,8 +15,7 @@ exports.getKays = (myStorage) => {
 }
 
 
-
-
+//get all values from memory storage
 exports.getValues = (myStorage) => {
 
     var values = []
@@ -28,6 +27,8 @@ exports.getValues = (myStorage) => {
 
     return values
 }
+
+
 
 
 exports.myStorage = myStorage
