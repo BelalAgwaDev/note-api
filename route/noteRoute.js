@@ -3,13 +3,13 @@ const noteController=require("../controller/noteController")
 const route=express.Router()
 
 
-route.get("/notes",noteController.getAllNotes)
+route.get("/",noteController.getAllNotes)
 
-route.post("/notes",noteController.saveNotes)
+route.post("/",noteController.saveNotes)
 
-route.put("/notes",noteController.updateNotes)
+route.put("/",noteController.updateNotes)
 
-route.delete("/notes/:noteId",noteController.deleteNotes)
+route.delete("/:noteId",noteController.deleteNotes)
 
 
 
