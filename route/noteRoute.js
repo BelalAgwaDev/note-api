@@ -7,7 +7,7 @@ route.get("/",noteController.getAllNotes)
 
 route.post("/",noteController.saveNotes)
 
-route.put("/",noteController.updateNotes)
+route.patch("/",noteController.updateNotes)
 
 route.delete("/:noteId",noteController.deleteNotes)
 
