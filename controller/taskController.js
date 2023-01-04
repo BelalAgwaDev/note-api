@@ -1,8 +1,11 @@
 const Task = require('../model/taskModel');
+const LoggerServies = require('../services/logger');
+const logger=new LoggerServies("taskController")
 
 const getAllTask = async function (req, res) {
     try {
         const getAllTask = await Task.find({})
+        logger.info("return all task",getAllTask)
         return res.status(200).send({
             status: 200,
             message: 'success to get all tasks',
@@ -20,25 +23,25 @@ const getAllTask = async function (req, res) {
 
 
 
-const getTask =async function (req, res) {
+const getTask = async function (req, res) {
 
     try {
-     const {id:taskId} =req.params
-     const getTask = await Task.findOne({_id:taskId})
+        const { id: taskId } = req.params
+        const getTask = await Task.findOne({ _id: taskId })
 
 
-     if(!getTask){
+        if (!getTask) {
 
-        return res.status(422).json({
-            status: 422,
-            message: 'no task with id : '+taskId,
-        })
+            return res.status(422).json({
+                status: 422,
+                message: 'no task with id : ' + taskId,
+            })
 
-     }
+        }
         return res.status(200).send({
             status: 200,
             message: 'success to get  tasks',
-            data:getTask
+            data: getTask
         })
 
 
@@ -49,7 +52,7 @@ const getTask =async function (req, res) {
             message: error.message,
         })
     }
- 
+
 }
 
 
@@ -63,6 +66,7 @@ const addTask = async function (req, res) {
             data: task
         })
     } catch (error) {
+        logger.error("add task error ",error.message)
         return res.status(422).send({
             status: 422,
             message: error.message,
@@ -77,36 +81,36 @@ const deleteTask = async function (req, res) {
 
 
     try {
-        const {id:taskId} =req.params
-        const deleteTask = await Task.findByIdAndDelete({_id:taskId})
-       
-   
-        if(!deleteTask){
-   
-           return res.status(422).json({
-               status: 422,
-               message: 'no task with id : '+taskId,
-              
-           })
-   
+        const { id: taskId } = req.params
+        const deleteTask = await Task.findByIdAndDelete({ _id: taskId })
+
+
+        if (!deleteTask) {
+
+            return res.status(422).json({
+                status: 422,
+                message: 'no task with id : ' + taskId,
+
+            })
+
         }
 
         return res.status(200).send({
             status: 200,
             message: 'success to delete task',
-            data:deleteTask
+            data: deleteTask
         })
-   
-   
-   
-       } catch (error) {
-           return res.status(500).send({
-               status: 500,
-               message: error.message,
-           })
-       }
- 
-       
+
+
+
+    } catch (error) {
+        return res.status(500).send({
+            status: 500,
+            message: error.message,
+        })
+    }
+
+
 
 }
 
@@ -114,34 +118,36 @@ const deleteTask = async function (req, res) {
 
 const updateTask = async function (req, res) {
     try {
-        const {id:taskId} =req.params
-        const updateTask = await Task.findByIdAndUpdate({_id:taskId},req.body,{new:true,runValidators:true})
-       
-   
-        if(!updateTask){
-   
-           return res.status(422).json({
-               status: 422,
-               message: 'no task with id : '+taskId,
-              
-           })
-   
+        const { id: taskId } = req.params
+        const updateTask = await Task.findByIdAndUpdate(
+            { _id: taskId }, req.body,
+            { new: true, runValidators: true,})
+
+
+        if (!updateTask) {
+
+            return res.status(422).json({
+                status: 422,
+                message: 'no task with id : ' + taskId,
+
+            })
+
         }
 
         return res.status(200).send({
             status: 200,
             message: 'success to update task',
-            data:updateTask
+            data: updateTask
         })
-   
-   
-   
-       } catch (error) {
-           return res.status(500).send({
-               status: 500,
-               message: error.message,
-           })
-       }
+
+
+
+    } catch (error) {
+        return res.status(500).send({
+            status: 500,
+            message: error.message,
+        })
+    }
 
 }
 
